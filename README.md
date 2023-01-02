@@ -1,1 +1,1 @@
-# CSC36000-Spring2023
+# CSC24400-Spring2023
