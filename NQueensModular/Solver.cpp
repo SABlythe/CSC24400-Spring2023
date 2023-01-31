@@ -2,19 +2,21 @@
 
 using namespace std;
 
-#define SIZE 30
-char board[SIZE][SIZE];
+#define MAX_SIZE 100
+char board[MAX_SIZE][MAX_SIZE];
+
+int actualSize; // the actual numer of rows/columns ...
 
 void initBoard()
 {
-    for (int row=0; row<SIZE; row++)
-        for (int col=0; col<SIZE; col++)
+    for (int row=0; row<actualSize; row++)
+        for (int col=0; col<actualSize; col++)
             board[row][col] = ' ';
 }
 void printRow(int thisRow)
 {
     // go through each column in the row
-    for (int colNumber=0; colNumber<SIZE; colNumber++)
+    for (int colNumber=0; colNumber<actualSize; colNumber++)
     {
         //   ... and print out the value found in that column
         cout << '|' << board[thisRow][colNumber];
@@ -26,7 +28,7 @@ void printRow(int thisRow)
 void printBorder()
 {
     //print out SIZE  "+- sequences"
-    for (int count=0; count<SIZE; count++)
+    for (int count=0; count<actualSize; count++)
         cout << "+-";
     // finish the border row by dropping down a line
     cout << '+' << endl;
@@ -34,7 +36,7 @@ void printBorder()
 void printBoard()
 {
     // go through each row
-    for (int rowNumber = 0; rowNumber<SIZE; rowNumber++)
+    for (int rowNumber = 0; rowNumber<actualSize; rowNumber++)
     {
         // before printing the row's values, print a '+-+-...' border
         printBorder();
@@ -77,7 +79,7 @@ bool canPlace(int inRow, int inCol)
     // check my lower left diagonal
     checkCol=inCol -1 ;
     checkRow=inRow +1 ;
-    while( checkCol >=0  &&   checkRow < SIZE )
+    while( checkCol >=0  &&   checkRow < actualSize )
     {
         if (board[checkRow][checkCol] == 'Q')
             return false;
@@ -92,11 +94,11 @@ bool solveBoard(int colForNextQueen)
     // if you've gotten beyond right edge of board, you've
     //  placed a queen in every other column, so you have solved
     //  the problem.
-    if (colForNextQueen >= SIZE)
+    if (colForNextQueen >= actualSize)
         return true;
 
     // try every row in this column
-    for (int rowNumber=0; rowNumber < SIZE; rowNumber++)
+    for (int rowNumber=0; rowNumber < actualSize; rowNumber++)
     {
         //    can i put a queen here?
         if (canPlace(rowNumber, colForNextQueen))
@@ -116,24 +118,4 @@ bool solveBoard(int colForNextQueen)
     // tried every possible row, but none worked if we get here
     //   (i.e. completed for loop)
     return false;
-}
-int main(int argc, char *argv[])
-{
-    initBoard();
-
-    /* uncomment this iif you want to see the empty board first
-    cout << "The UNsolved board is :" << endl;
-    printBoard();
-    */
-
-    if (solveBoard(0) )
-    {
-        cout << "The solved board is :" << endl;
-        printBoard();
-    }
-    else
-    {
-        cout << "No solution!!!" << endl;
-    }
-    return 0;
 }
