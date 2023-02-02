@@ -7,19 +7,32 @@ using namespace std;
 #define MAX_SIZE 100
 char board[MAX_SIZE][MAX_SIZE];
 
-int actualSize; // the actual numer of rows/columns ...
-
-void initBoard()
+Solver::Solver()
 {
-    for (int row=0; row<actualSize; row++)
-        for (int col=0; col<actualSize; col++)
+    _actualSize =8;
+
+
+    for (int row=0; row<_actualSize; row++)
+        for (int col=0; col<_actualSize; col++)
             board[row][col] = ' ';
 }
 
-void printRow(int thisRow)
+Solver::Solver(int boardDim)
+{
+    _actualSize =boardDim;
+
+
+    for (int row=0; row<_actualSize; row++)
+        for (int col=0; col<_actualSize; col++)
+            board[row][col] = ' ';
+}
+
+
+void
+Solver::printRow(int thisRow)
 {
     // go through each column in the row
-    for (int colNumber=0; colNumber<actualSize; colNumber++)
+    for (int colNumber=0; colNumber<_actualSize; colNumber++)
     {
         //   ... and print out the value found in that column
         cout << '|' << board[thisRow][colNumber];
@@ -28,18 +41,21 @@ void printRow(int thisRow)
     cout << '|' << endl;
 }
 
-void printBorder()
+void
+Solver::printBorder()
 {
     //print out SIZE  "+- sequences"
-    for (int count=0; count<actualSize; count++)
+    for (int count=0; count<_actualSize; count++)
         cout << "+-";
     // finish the border row by dropping down a line
     cout << '+' << endl;
 }
-void printBoard()
+
+void
+Solver::printBoard()
 {
     // go through each row
-    for (int rowNumber = 0; rowNumber<actualSize; rowNumber++)
+    for (int rowNumber = 0; rowNumber<_actualSize; rowNumber++)
     {
         // before printing the row's values, print a '+-+-...' border
         printBorder();
@@ -48,17 +64,11 @@ void printBoard()
     }
     printBorder();
 
-    /*
-    for (int row=0; row<SIZE; row++)
-    {
-        for (int col=0; col<SIZE; col++)
-            cout << board[row][col];
-        cout << endl;
-    }
-    */
+
 }
 
-bool canPlace(int inRow, int inCol)
+bool
+Solver::canPlace(int inRow, int inCol)
 {
     // check my row
     //   ... only need to check colums to my left (lower index than me)
@@ -82,7 +92,7 @@ bool canPlace(int inRow, int inCol)
     // check my lower left diagonal
     checkCol=inCol -1 ;
     checkRow=inRow +1 ;
-    while( checkCol >=0  &&   checkRow < actualSize )
+    while( checkCol >=0  &&   checkRow < _actualSize )
     {
         if (board[checkRow][checkCol] == 'Q')
             return false;
@@ -92,16 +102,17 @@ bool canPlace(int inRow, int inCol)
     }
     return true;
 }
-bool solveBoard(int colForNextQueen)
+bool
+Solver::solveBoard(int colForNextQueen)
 {
     // if you've gotten beyond right edge of board, you've
     //  placed a queen in every other column, so you have solved
     //  the problem.
-    if (colForNextQueen >= actualSize)
+    if (colForNextQueen >= _actualSize)
         return true;
 
     // try every row in this column
-    for (int rowNumber=0; rowNumber < actualSize; rowNumber++)
+    for (int rowNumber=0; rowNumber < _actualSize; rowNumber++)
     {
         //    can i put a queen here?
         if (canPlace(rowNumber, colForNextQueen))
@@ -122,3 +133,4 @@ bool solveBoard(int colForNextQueen)
     //   (i.e. completed for loop)
     return false;
 }
+
