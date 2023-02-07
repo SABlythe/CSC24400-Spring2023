@@ -7,7 +7,7 @@ using namespace std;
 int main (int argc, char *argv[])
 {
     Complex myNum(3 , 9);
-    Complex other(-6, 7.2);
+    Complex other(3, -9);
 
     myNum.print();
     cout << endl;
@@ -26,7 +26,8 @@ int main (int argc, char *argv[])
 
     Complex prod;
 
-    prod = myNum*other;
+    // we'll fix this in class next time!
+    //prod = myNum*other+sum;
     prod.print();
 
     return 0;
