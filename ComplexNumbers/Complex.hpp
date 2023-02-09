@@ -13,9 +13,18 @@ public:
 
     //Complex add(Complex rhs);
     Complex operator+(Complex rhs);
+    Complex operator*(Complex rhs);
+    Complex operator*(double rhs);
+    Complex operator/(Complex rhs);
+
+    Complex operator!();
+
 
     void print();
+
+    friend Complex operator*(double lhs, Complex rhs);
 };
+
 
 
 #endif

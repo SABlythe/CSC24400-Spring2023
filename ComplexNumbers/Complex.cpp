@@ -28,6 +28,56 @@ Complex::operator+(Complex rhs)
     return answer;
 }
 
+Complex
+//Complex::add(Complex rhs)
+Complex::operator*(Complex rhs)
+{
+    Complex answer;
+
+    answer._real = _real * rhs._real - _imaginary * rhs._imaginary;
+    answer._imaginary = _real * rhs._imaginary + rhs._real*_imaginary;
+
+    return answer;
+}
+
+Complex
+Complex::operator*(double foo)
+{
+    Complex bar;
+
+    bar._real = foo * _real;
+    bar._imaginary = foo * _imaginary;
+
+    return bar;
+}
+
+Complex
+Complex::operator/(Complex denom)
+{
+    Complex answer;
+
+    Complex denomConj = !denom;
+
+    answer = (*this) * denomConj;
+
+    Complex answerDenom = denom * denomConj;
+
+    double multiplier = 1.0 / answerDenom._real;
+
+    //answer = answer * multiplier;
+    answer = multiplier * answer;
+
+    return answer;
+}
+
+Complex Complex::operator!()
+{
+    Complex answer;
+    answer._real = _real;
+    answer._imaginary = - _imaginary;
+    return answer;
+}
+
 void
 Complex::print()
 {
@@ -35,4 +85,14 @@ Complex::print()
 
     if (_imaginary != 0)
         cout << "+" <<  _imaginary << "i" << endl;
+}
+
+Complex operator*(double foo, Complex rhs)
+{
+    Complex bar;
+
+    bar._real = foo * rhs._real;
+    bar._imaginary = foo * rhs._imaginary;
+
+    return bar;
 }
