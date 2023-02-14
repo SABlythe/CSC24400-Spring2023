@@ -1,6 +1,7 @@
 #ifndef _COMPLEX_HPP_
 #define _COMPLEX_HPP_
 
+#include <iostream>
 
 class Complex
 {
@@ -23,6 +24,7 @@ public:
     void print();
 
     friend Complex operator*(double lhs, Complex rhs);
+    friend std::ostream & operator<< (std::ostream &os, Complex rhs );
 };
 
 

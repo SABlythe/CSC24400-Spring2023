@@ -96,3 +96,13 @@ Complex operator*(double foo, Complex rhs)
 
     return bar;
 }
+
+std::ostream & operator<< (std::ostream &os, Complex rhs )
+{
+    os << rhs._real ;
+
+    if (rhs._imaginary != 0)
+        os << "+" <<  rhs._imaginary << "i" << endl;
+
+    return os;
+}
