@@ -18,12 +18,14 @@ Complex::Complex(double realPart, double imaginaryPart)
 
 Complex
 //Complex::add(Complex rhs)
-Complex::operator+(Complex rhs)
+Complex::operator+(const Complex &rhs) const
 {
     Complex answer;
 
     answer._real = _real + rhs._real;
     answer._imaginary = _imaginary + rhs._imaginary;
+
+    //rhs._imaginary=764.341;
 
     return answer;
 }

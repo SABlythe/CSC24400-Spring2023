@@ -9,11 +9,12 @@ int main (int argc, char *argv[])
     Complex myNum(3 , 9);
     Complex other(3, -9);
 
-    myNum.print();
-    cout << endl;
-    other.print();
-    cout << endl;
-
+    //myNum.print();
+    //cout << endl;
+    cout << "MyNum =" << myNum << endl;
+    //other.print();
+    //cout << endl;
+    cout << "other =" << other << endl;
     Complex sum;
 
     //sum = myNum + other;
@@ -23,6 +24,8 @@ int main (int argc, char *argv[])
 
     sum.print();
     cout << endl;
+    cout << "MyNum =" << myNum << endl;
+    cout << "other =" << other << endl;
 
     Complex prod;
 
@@ -49,5 +52,17 @@ int main (int argc, char *argv[])
     // would like to be able to ....
     cout << "division is " << division << endl;
 
+    cout << "real part of division is "
+        << division.real() << endl;
+    cout << "imaginary part of division is "
+        << division.imaginary() << endl;
+
+    division.imaginary() = 42;
+    cout << "division is " << division << endl;
+
+    /*
+    double bad= division.badIdea();
+    cout << endl << bad << endl;
+*/
     return 0;
 }

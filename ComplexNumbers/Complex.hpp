@@ -12,8 +12,18 @@ public:
     Complex();
     Complex(double realPart, double imaginaryPart);
 
+    // accessor methods
+    double real() const {return _real;}
+
+    // modifier methods
+    double& imaginary() {return _imaginary;}
+    double& real() {return _real;}
+
     //Complex add(Complex rhs);
-    Complex operator+(Complex rhs);
+    Complex operator+(const Complex &rhs) const;
+
+    // you should probably update these with const's
+    //    as for operator+ above ... skipped to save time
     Complex operator*(Complex rhs);
     Complex operator*(double rhs);
     Complex operator/(Complex rhs);
@@ -25,6 +35,9 @@ public:
 
     friend Complex operator*(double lhs, Complex rhs);
     friend std::ostream & operator<< (std::ostream &os, Complex rhs );
+
+    //////////////////////////////////////////
+    const double& badIdea() {return _imaginary+_real;}
 };
 
 
